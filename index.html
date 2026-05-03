@@ -2,252 +2,281 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Safe Sun | Hawaii Edition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Sun | Protección Solar desde Kīhei para el Mundo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --primary-orange: #FF6B00;
-            --bright-orange: #FF9E00;
-            --dark-bg: #050505;
+            --deep-orange: #E65100;
+            --sunset-yellow: #FFB300;
+            --dark-bg: #0D0D0E;
             --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.08);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             background-color: var(--dark-bg);
-            color: white;
-            line-height: 1.5;
+            color: #fff;
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* EFECTOS VISUALES DE FONDO */
-        .glow-sphere {
+        /* Fondo Animado */
+        .ocean-bg {
             position: fixed;
-            width: 300px; height: 300px;
-            background: radial-gradient(circle, rgba(255, 107, 0, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            filter: blur(50px);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 10% 10%, rgba(255, 107, 0, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 90% 90%, rgba(255, 179, 0, 0.05) 0%, transparent 50%);
             z-index: -1;
-            animation: move 20s infinite alternate;
         }
 
-        @keyframes move {
-            from { top: -10%; left: -10%; }
-            to { top: 80%; left: 80%; }
-        }
-
+        /* Header Estilo Apple */
         header {
-            padding: 15px 5%;
+            padding: 20px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
             position: fixed; width: 100%; top: 0; z-index: 1000;
             border-bottom: 1px solid var(--glass-border);
         }
 
-        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-        .logo img { width: 35px; border-radius: 8px; }
-        .logo span { font-weight: 800; font-size: 1.2rem; color: #fff; letter-spacing: -0.5px; }
+        .logo { display: flex; align-items: center; gap: 15px; text-decoration: none; }
+        .logo img { width: 40px; border-radius: 8px; }
+        .logo span { font-weight: 800; font-size: 1.4rem; color: #fff; letter-spacing: -1px; }
 
-        /* HERO RESPONSIVE */
+        .nav-links a { color: #aaa; text-decoration: none; margin-left: 30px; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary-orange); }
+
+        /* Hero Section */
         .hero {
+            padding: 180px 8% 100px;
+            display: flex; align-items: center; justify-content: space-between;
             min-height: 100vh;
-            padding: 120px 5% 60px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
         }
 
-        .hero-content h1 {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            font-weight: 800;
-            line-height: 1;
-            margin-bottom: 20px;
-            background: linear-gradient(180deg, #fff 0%, #888 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .hero-text { flex: 1; max-width: 600px; }
+        .hero-text h1 { font-size: 4.5rem; line-height: 1; margin-bottom: 25px; font-weight: 900; }
+        .hero-text h1 span { color: var(--primary-orange); }
+        .hero-text p { font-size: 1.25rem; color: #888; margin-bottom: 40px; }
+
+        .cta-group { display: flex; gap: 20px; }
+        .btn {
+            padding: 16px 32px; border-radius: 12px; font-weight: 700; 
+            text-decoration: none; transition: 0.3s; display: inline-flex; align-items: center; gap: 10px;
+        }
+        .btn-primary { background: var(--primary-orange); color: #fff; box-shadow: 0 15px 30px rgba(255, 107, 0, 0.2); }
+        .btn-primary:hover { transform: translateY(-3px); background: var(--deep-orange); }
+
+        /* Historia Hawaii Section */
+        .story-section { padding: 100px 8%; background: rgba(255, 107, 0, 0.02); }
+        .story-grid { display: flex; align-items: center; gap: 60px; }
+        .story-img { flex: 1; border-radius: 30px; overflow: hidden; border: 1px solid var(--glass-border); }
+        .story-img img { width: 100%; display: block; filter: saturate(1.2); }
+        .story-content { flex: 1; }
+        .tag { color: var(--primary-orange); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 15px; display: block; }
+
+        /* Características */
+        .benefits { padding: 100px 8%; text-align: center; }
+        .section-title { font-size: 3rem; margin-bottom: 60px; font-weight: 800; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { 
+            background: var(--glass); border: 1px solid var(--glass-border); padding: 50px 30px; 
+            border-radius: 24px; transition: 0.4s; text-align: left;
+        }
+        .card:hover { border-color: var(--primary-orange); background: rgba(255, 255, 255, 0.05); transform: translateY(-10px); }
+        .card i { font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 25px; }
+        .card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+
+        /* Cómo instalar */
+        .install-guide { padding: 100px 8%; background: #111; border-radius: 50px; margin: 0 4%; }
+        .steps { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 40px; margin-top: 50px; }
+        .step { text-align: center; max-width: 200px; }
+        .step-num { 
+            width: 50px; height: 50px; background: var(--primary-orange); border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: 900;
         }
 
-        .hero-content p {
-            font-size: clamp(1rem, 4vw, 1.25rem);
-            color: #888;
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
+        /* Footer */
+        footer { padding: 80px 8% 40px; border-top: 1px solid var(--glass-border); margin-top: 100px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px; margin-bottom: 60px; }
+        .footer-col h4 { margin-bottom: 25px; color: var(--primary-orange); }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: #666; text-decoration: none; transition: 0.3s; }
+        .footer-col ul li a:hover { color: #fff; }
 
-        .btn-main {
-            background: #fff;
-            color: #000;
-            padding: 18px 40px;
-            border-radius: 100px;
-            text-decoration: none;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        /* --- SECCIÓN RESPONSIVE PARA CELULAR --- */
+        @media (max-width: 768px) {
+            header { padding: 15px 5%; }
+            .nav-links { display: none; } /* Ocultar links en móvil para espacio */
+            
+            .hero { 
+                flex-direction: column; 
+                text-align: center; 
+                padding: 120px 5% 60px; 
+            }
+            .hero-text h1 { font-size: 2.8rem; }
+            .hero-text p { font-size: 1.1rem; }
+            .cta-group { flex-direction: column; align-items: center; }
+            .btn { width: 100%; justify-content: center; }
+            .hero-visual { 
+                justify-content: center !important; 
+                margin-top: 40px;
+                width: 100%;
+            }
+            .hero-visual img { width: 220px !important; }
 
-        .btn-main:active { transform: scale(0.95); }
+            .story-grid { flex-direction: column; gap: 30px; }
+            .story-section { padding: 60px 5%; }
+            .section-title { font-size: 2.2rem; }
 
-        /* MOCKUP RESPONSIVE */
-        .hero-visual {
-            margin-top: 50px;
-            width: 100%;
-            max-width: 320px;
-            position: relative;
-        }
-
-        .hero-visual img {
-            width: 100%;
-            border-radius: 45px;
-            border: 8px solid #1a1a1a;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-        }
-
-        /* SECCIÓN HISTORIA */
-        .story {
-            padding: 80px 5%;
-            background: linear-gradient(180deg, transparent, rgba(255, 107, 0, 0.05));
-        }
-
-        .story-box {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            padding: 40px 25px;
-            border-radius: 30px;
-            text-align: center;
-        }
-
-        /* BENEFICIOS GRID RESPONSIVE */
-        .benefits { padding: 80px 5%; }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            padding: 30px;
-            border-radius: 24px;
-            transition: 0.3s;
-        }
-
-        .card i {
-            font-size: 2rem;
-            color: var(--primary-orange);
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        /* FOOTER */
-        footer {
-            padding: 60px 5% 40px;
-            text-align: center;
-            border-top: 1px solid var(--glass-border);
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
-            font-size: 1.5rem;
-        }
-
-        /* AJUSTES PARA PC */
-        @media (min-width: 1024px) {
-            .hero { flex-direction: row; text-align: left; padding: 0 10%; }
-            .hero-content { flex: 1; }
-            .hero-content p { margin-left: 0; }
-            .hero-visual { flex: 1; max-width: 350px; }
-            .grid { grid-template-columns: repeat(3, 1fr); }
+            .install-guide { border-radius: 20px; padding: 50px 5%; }
+            .footer-grid { text-align: center; }
+            .logo { justify-content: center; }
+            .footer-col div { justify-content: center; }
         }
     </style>
 </head>
 <body>
-    <div class="glow-sphere"></div>
+    <div class="ocean-bg"></div>
 
     <header>
         <a href="#" class="logo">
-            <img src="icon-512-removebg-preview.png" alt="Logo">
+            <img src="logo.png" alt="Safe Sun Logo">
             <span>SAFE SUN</span>
         </a>
-        <div style="font-size: 0.8rem; color: var(--primary-orange); font-weight: 700;">ALOHA</div>
+        <nav class="nav-links">
+            <a href="#historia">Nuestra Historia</a>
+            <a href="#beneficios">Beneficios</a>
+            <a href="#descarga">Descargar</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
     </header>
 
     <section class="hero">
-        <div class="hero-content">
-            <h1>Safe Sun<span>.</span></h1>
-            <p>La inteligencia solar de Kīhei en tu mano. Protege a tu familia con datos en tiempo real.</p>
-            <a href="TU_LINK_DE_APP" class="btn-main">
-                <i class="fa-solid fa-download"></i> Descargar App
-            </a>
+        <div class="hero-text">
+            <span class="tag">Desde Maui para el mundo</span>
+            <h1>Protege tu piel bajo el sol de <span>Hawaii</span></h1>
+            <p>Diseñada en las playas de Kīhei, Safe Sun es la primera aplicación con la sabiduría local para que disfrutes del paraíso sin quemaduras.</p>
+            <div class="cta-group">
+                <a href="TU_LINK_DE_APP_AQUI" class="btn btn-primary"><i class="fa-solid fa-download"></i> Obtener App Gratis</a>
+                <a href="#historia" class="btn" style="border: 1px solid #444; color: white;">Ver Historia</a>
+            </div>
         </div>
-        
-        <div class="hero-visual">
-            <img src="WhatsApp Image 2026-05-02 at 4.36.06 PM.jpeg" alt="App Preview">
-        </div>
-    </section>
-
-    <section class="story">
-        <div class="story-box">
-            <h2 style="margin-bottom: 20px;">Nuestra Historia</h2>
-            <p style="color: #ccc;">Creamos Safe Sun porque en Maui el sol no es un juego. Queríamos una herramienta que fuera tan hermosa como funcional, ayudando a locales y turistas a disfrutar del paraíso sin riesgos.</p>
+        <div class="hero-visual" style="flex: 1; display: flex; justify-content: flex-end;">
+            <img src="imagenmuestra.png" alt="App Preview" style="width: 280px; border-radius: 40px; border: 8px solid #222; box-shadow: 0 40px 80px rgba(0,0,0,0.6);">
         </div>
     </section>
 
-    <section class="benefits">
-        <h2 style="text-align: center; margin-bottom: 40px;">¿Por qué Safe Sun?</h2>
+    <section id="historia" class="story-section">
+        <div class="story-grid">
+            <div class="story-img">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Playa de Kihei">
+            </div>
+            <div class="story-content">
+                <span class="tag">El Origen</span>
+                <h2 class="section-title" style="font-size: 2.5rem; text-align: left; margin-bottom: 20px;">Nacida en el Pacífico</h2>
+                <p style="color: #bbb; margin-bottom: 20px;">Kīhei es conocido por su sol radiante y cielos despejados, pero el sol de Hawaii no perdona. Safe Sun nació de la necesidad de proteger a los surfistas, familias y viajeros que a menudo ignoran la potencia del índice UV en el medio del océano.</p>
+                <p style="color: #bbb;">Nuestra misión es simple: que nadie en Maui, ni en ninguna parte del mundo, sufra las consecuencias de una exposición solar no planificada. Usamos algoritmos de precisión para decirte exactamente cuándo el sol deja de ser un amigo y se vuelve un riesgo.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="beneficios" class="benefits">
+        <span class="tag">¿Por qué elegirnos?</span>
+        <h2 class="section-title">Tecnología al servicio de tu piel</h2>
         <div class="grid">
             <div class="card">
-                <i class="fa-solid fa-bolt"></i>
-                <h3>Ultra Rápida</h3>
-                <p>Datos actualizados cada minuto directo de estaciones locales.</p>
+                <i class="fa-solid fa-satellite"></i>
+                <h3>Datos de Precisión</h3>
+                <p>Conectamos con satélites meteorológicos para darte el índice UV exacto de tu posición, no un promedio general.</p>
             </div>
             <div class="card">
-                <i class="fa-solid fa-droplet"></i>
-                <h3>Recordatorios</h3>
-                <p>Te avisamos cuando es momento de volver a ponerte bloqueador.</p>
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <h3>Temporizador Solar</h3>
+                <p>Calculamos cuánto tiempo puedes estar bajo el sol según tu tipo de piel antes de sufrir daños irreparables.</p>
             </div>
             <div class="card">
-                <i class="fa-solid fa-face-smile"></i>
-                <h3>Fácil de usar</h3>
-                <p>Diseñada para que hasta un niño entienda cuándo el sol está fuerte.</p>
+                <i class="fa-solid fa-kit-medical"></i>
+                <h3>Plan de Salud</h3>
+                <p>Consejos personalizados sobre el uso de SPF 50+, ropa con protección UV y horarios seguros para actividades.</p>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="logo" style="justify-content: center; margin-bottom: 20px;">
-            <img src="icon-512-removebg-preview.png" alt="Logo">
-            <span>SAFE SUN</span>
+    <section id="descarga" class="install-guide">
+        <h2 class="section-title" style="text-align: center;">Únete a la comunidad Safe Sun</h2>
+        <p style="text-align: center; color: #888; max-width: 600px; margin: 0 auto 50px;">Nuestra app es una PWA (Progressive Web App), lo que significa que no ocupa espacio en tu móvil y se actualiza sola.</p>
+        
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h4>Abre el Link</h4>
+                <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">Entra a la URL de la app desde tu móvil.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h4>Opciones</h4>
+                <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">Pulsa el botón "Compartir" (iOS) o los 3 puntos (Android).</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h4>Instalar</h4>
+                <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">Elige "Añadir a pantalla de inicio" y ¡Listo!</p>
+            </div>
         </div>
-        <p style="color: #666;">Hecho con ❤️ en Kīhei, Hawaii</p>
-        <div class="social-links">
-            <i class="fa-brands fa-instagram"></i>
-            <i class="fa-brands fa-tiktok"></i>
+
+        <div style="text-align: center; margin-top: 60px;">
+            <a href="TU_LINK_DE_APP_AQUI" class="btn btn-primary" style="font-size: 1.4rem; padding: 20px 50px;">
+                IR A LA APP AHORA
+            </a>
         </div>
-        <p style="font-size: 0.7rem; color: #333; margin-top: 20px;">© 2026 Safe Sun. Todos los derechos reservados.</p>
+    </section>
+
+    <footer id="contacto">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo">
+                    <img src="icon-512-removebg-preview.png" alt="Logo">
+                    <span>SAFE SUN</span>
+                </div>
+                <p style="color: #555; margin-top: 20px;">Protegiendo pieles bajo el sol de Hawaii desde 2026. Aloha!</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul>
+                    <li><a href="#historia">Historia</a></li>
+                    <li><a href="#beneficios">Beneficios</a></li>
+                    <li><a href="#descarga">Descargar</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacidad</a></li>
+                    <li><a href="#">Términos</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <p style="color: #666;">¿Dudas? Escríbenos:</p>
+                <a href="mailto:aloha@safesun.app" style="color: var(--primary-orange); text-decoration: none; font-weight: bold;">aloha@safesun.app</a>
+                <div style="margin-top: 20px; display: flex; gap: 15px; font-size: 1.5rem; color: #333;">
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-twitter"></i>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; color: #333; font-size: 0.8rem; border-top: 1px solid #1a1a1a; padding-top: 30px;">
+            &copy; 2026 Safe Sun Inc. Desarrollado con ❤️ en Kīhei, Maui.
+        </div>
     </footer>
 
-    <script>
-        // Efecto visual: La esfera de luz sigue un poco el scroll
-        window.addEventListener('scroll', () => {
-            const sphere = document.querySelector('.glow-sphere');
-            const value = window.scrollY;
-            sphere.style.transform = `translateY(${value * 0.5}px)`;
-        });
-    </script>
 </body>
 </html>
